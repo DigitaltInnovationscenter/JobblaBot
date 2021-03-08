@@ -1,6 +1,5 @@
 import urllib.parse
 import requests
-import webbrowser
 import re
 import discord
 import os , sys

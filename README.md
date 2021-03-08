@@ -6,7 +6,11 @@ Download discord and Create an account: https://discordapp.com/
 
 Download and install python
 
-Install addons via Pip pip install urllib.parse pip install requests pip install re pip install json pip install feedparser pip install discord
+Install addons via Pip
+	pip install urllib.parse 
+	pip install requests 
+	pip install re 
+	pip install discord
 
 Go to this link : https://discordapp.com/developers/applications
 
