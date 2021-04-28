@@ -16,7 +16,7 @@ Go to this link : https://discordapp.com/developers/applications
 
 Create an application
 
-open the application and go to Bot
+Open the application and go to Bot
 
 Create a Bot
 
@@ -39,7 +39,17 @@ The bot should now show up as online in your server
 
 Go to https://jobtechdev.se/docs/apis/jobsearch/ and Request an API-KEY (https://apirequest.jobtechdev.se/)
 
-After you have key open the Cred file again and create a variable called Api and paste your apikey there
+After you have a key, open the Cred file again and create a variable called Api and paste your apikey there
+
+In the Cred file add 2 Variables azureQNASITE and azureQNAToken
+
+azureQNASITE add the site, Should look something like this https://test.azurewebsites.net/qnamaker/knowledgebases/213ter13123/generateAnswer
+
+azureQNAToken add
+    'Authorization': 'EndpointKey add your own key',
+    'Content-type': 'application/json'
 
 Restart the program and it should now work
+
+
 

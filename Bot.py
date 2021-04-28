@@ -1,12 +1,16 @@
-import urllib.parse
+
 import requests
 import re
 import discord
 import os , sys
+import http.client, urllib.parse, time, sys
 
+from datetime import *
 from discord import Game
 from discord import user
+from discord import message
 from discord.ext.commands import Bot
+
 from Cred import *
 
 
@@ -15,7 +19,7 @@ from Cred import *
 BOT_PREFIX = '!'
 TOKEN = botToken
 
-client = Bot(command_prefix=BOT_PREFIX)
+client = Bot(command_prefix=BOT_PREFIX, help_command=None)
 
 
 @client.event
@@ -46,7 +50,6 @@ async def jobb(self, Jobb="bagare", Stad="Stockholm", Antal="5"):
     jobInfo.append(Jobb)
     jobInfo.append(Stad)
     main_api = 'https://jobsearch.api.jobtechdev.se/search?'
-    #params = {"nyckelord": Jobb + " " + Stad, "sida": "1", "antalrader": Antal}
     params = {"q" : Jobb ,"%20" : Stad}
     headers = {'accept': 'application/json','api-key' : Api}
 
@@ -156,7 +159,39 @@ async def FindBy(self, ctx = "Patience"):
     await self.channel.send( embed = embed )
       
 
+@client.command()
+async def Ask(self, ctx , a = "", b= "", c= "" ,d= "" ,e= "" , f= "" ,g= "" ,h= "" ,i= "" ,j= "" ,k= "", l= "", m= "", n= ""):
+    finalQuestion = ""
+    question = [ctx , a, b, c ,d ,e , f ,g ,h ,i ,j ,k, l, m, n]
+    for item in question:
+        if (item != ""):
+            finalQuestion += item
+            finalQuestion += " "
+        
+    print(question)
+    print(ctx , a, b, c ,d ,e , f ,g ,h ,i ,j ,k, l, m, n)
+
+
+    data = '{\'question\':\'' + finalQuestion + '\'}'
+
+    response = requests.post(azureQNASite, headers=azureQNAToken, data=data).json()
+    print(response['answers'][0])
+    
+    await self.channel.send(response['answers'][0]['answer'])
 
 
 
+
+@client.command()
+async def help(self, ctx = ""):
+    test = ""
+    if(ctx == "Ask"):
+        test = "With this command you can ask for information about a specific skill\nWrite for example: !Ask Problem-solving"
+    elif(ctx == "jobb"):
+        test = "With this command you search an API for different jobadds that is currently up\nWrite What job you wanna search for and where\nFor example: !jobb Bagare Stockholm"
+    else:
+        test = "The command that are availible are:\n*  !Ask\n*  !jobb\nIf you want more information about the commands write\n*  !help Ask\n*  !help jobb"
+
+    await self.channel.send(test)
+    
 client.run(TOKEN)
